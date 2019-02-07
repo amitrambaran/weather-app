@@ -35,6 +35,7 @@ searchQuery.addEventListener("keypress", function (event) {
 //Parse text input and append to API link
 function parseSearchInput(event) {
     if (event.which === 13) {
+        dayTrack = 0;
         content.style.opacity = 1;
         if (searchQuery.value === "") {
             alert("Please enter a city.");
@@ -85,6 +86,7 @@ function parseCurrentData() {
     setBackground();
     hourlyConstruct();
     dailyConstruct();
+    getDaysOfWeek();
 }
 
 //Constructs hourly forecast data
@@ -102,9 +104,10 @@ function hourlyConstruct() {
 function dailyConstruct() {
     for (let i = 0; i < 5; i++) {
         dayTrack += 7;
-        console.log(data.list[dayTrack].main.temp - 273 + "°");
-        daily[i].innerHTML = getIconHTML(dayTrack) + "" + parseInt(data.list[dayTrack].main.temp - 273) + "°";
+        //console.log(data.list[dayTrack].main.temp - 273 + "°");
+        daily[i].innerHTML = getDaysOfWeek(i) + " " + getIconHTML(dayTrack) + "" + parseInt(data.list[dayTrack].main.temp - 273) + "°";
     }
+
 }
 
 //Retreive current date/time info
@@ -114,6 +117,18 @@ function getDateTime() {
     var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
     dateTime = date + ' ' + time + " UTC";
     return dateTime;
+}
+
+function getDaysOfWeek(day) {
+    day += 1;
+    let myDays =
+        ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+    let today = new Date();
+    let thisDay = today.getDay();
+    dayOfWeek = myDays[thisDay];
+    console.log(myDays[thisDay + day]);
+    return (myDays[thisDay + day]);
+
 }
 
 //Retreive corresponding thumbnail based on weather conditions
