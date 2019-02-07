@@ -2,6 +2,33 @@ html {
     height: 100%;
 }
 
+body {
+    font-family: 'Roboto', sans-serif;
+    transition-delay: 0.3s;
+}
+
 .container {
     text-align: center;
+    transition: all 1s;
+}
+
+#location {
+    font-size: 4rem;
+}
+
+#temp {
+    display: flex;
+    font-size: 5em;
+}
+
+#desc {
+    display: flex;
+}
+
+.content{
+    -webkit-transition: opacity .5s ease-in-out;
+    -moz-transition: opacity .5s ease-in-out;
+    -ms-transition: opacity .5s ease-in-out;
+    -o-transition: opacity .5s ease-in-out;
+    transition: opacity .5s ease-in-out;
 }

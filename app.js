@@ -3,11 +3,12 @@ var data;
 let searchQuery = document.querySelector("input[type='text']");
 let loc = document.getElementById("location");
 let temp = document.getElementById("temp");
-let cond = document.getElementById("cond");
 let desc = document.getElementById("desc");
 let humidity = document.getElementById("humidity");
-
-function Weather(city, cond, desc, humidity, loc, timeStamp, temp, wind){
+var content = document.querySelector(".content");
+content.style.transition = "all 2s";
+content.style.opacity = 0;
+function Weather(city, cond, humidity, loc, timeStamp, temp, wind){
     this.city = city;
     this.cond = cond;
     this.desc = desc;
@@ -24,9 +25,14 @@ searchQuery.addEventListener("keypress", function (event) {
     parseSearchInput(event);
 });
 
+if (searchQuery.value === ""){
+    content.style.opacity = 0;
+}
+
 //Parse text input and append to API link
 function parseSearchInput(event) {
     if (event.which === 13) {
+        content.style.opacity = 1;        
         if (searchQuery.value === "") {
             alert("Please enter a city.");
         }
@@ -59,20 +65,17 @@ function httpRequest(url) {
 
 function parseCurrentData() {
     let set1 = new Weather();
-    set1.cond = data.list[0].weather[0].main;
     set1.desc = data.list[0].weather[0].description;
-    set1.humidity = data.list[0].main.humidity;
+    set1.humidity = "Humidity: " + data.list[0].main.humidity + "%";
     set1.loc = data.city.name + ", " + data.city.country;
     set1.temp = parseInt(data.list[0].main.temp - 273) + "°";
-    set1.wind = data.list[0].wind.speed;
-
-    cond.innerHTML = set1.cond;
+    set1.wind = "Wind speed: " + data.list[0].wind.speed + " MPH";
     desc.innerHTML = set1.desc;
     humidity.innerHTML = set1.humidity;
     loc.innerHTML = set1.loc;
     temp.innerHTML = set1.temp;
     wind.innerHTML = set1.wind;
-    console.log(set1);
+   
 }
 
 function getDateTime() {
