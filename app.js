@@ -12,6 +12,7 @@ let picture = document.getElementById("picture");
 let hourly = document.getElementsByClassName("hourly");
 let daily = document.getElementsByClassName("daily");
 
+//Weather object constructor
 function Weather(city, cond, humidity, loc, timeStamp, temp, wind) {
     this.city = city;
     this.cond = cond;
@@ -54,9 +55,9 @@ function httpRequest(url) {
             data = JSON.parse(httpReq.responseText);
             parseCurrentData();
             //console.log(data);
-            //document.getElementById("temperature").textContent = data.main.temp;
         }
         else {
+            alert("Please enter a valid city.");
             console.log("Status error");
         }
     }
