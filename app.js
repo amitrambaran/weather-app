@@ -1,17 +1,21 @@
 const apiKey = "e5c70d2a66ae1d10e85c6dd2081e302d";
 var data;
 let searchQuery = document.querySelector("input[type='text']");
-let city = document.getElementById("city");
+let loc = document.getElementById("location");
 let temp = document.getElementById("temp");
 let cond = document.getElementById("cond");
+let desc = document.getElementById("desc");
 let humidity = document.getElementById("humidity");
 
-function Weather(temp, cond, wind, humidity, timeStamp){
-    this.temp = temp;
+function Weather(city, cond, desc, humidity, loc, timeStamp, temp, wind){
+    this.city = city;
     this.cond = cond;
-    this.wind = wind;
+    this.desc = desc;
     this.humidity = humidity;
+    this.loc = loc;
     this.timeStamp = timeStamp;
+    this.temp = temp;
+    this.wind = wind;
 };
 
 //console.log(getDateTime());
@@ -55,11 +59,19 @@ function httpRequest(url) {
 
 function parseCurrentData() {
     let set1 = new Weather();
-    set1.cond = data.list[0].weather[0];
+    set1.cond = data.list[0].weather[0].main;
+    set1.desc = data.list[0].weather[0].description;
     set1.humidity = data.list[0].main.humidity;
+    set1.loc = data.city.name + ", " + data.city.country;
     set1.temp = parseInt(data.list[0].main.temp - 273) + "°";
     set1.wind = data.list[0].wind.speed;
-    
+
+    cond.innerHTML = set1.cond;
+    desc.innerHTML = set1.desc;
+    humidity.innerHTML = set1.humidity;
+    loc.innerHTML = set1.loc;
+    temp.innerHTML = set1.temp;
+    wind.innerHTML = set1.wind;
     console.log(set1);
 }
 
