@@ -5,9 +5,10 @@ let loc = document.getElementById("location");
 let temp = document.getElementById("temp");
 let desc = document.getElementById("desc");
 let humidity = document.getElementById("humidity");
-var content = document.querySelector(".content");
-content.style.transition = "all 2s";
-content.style.opacity = 0;
+let content = document.querySelector(".content");
+let dateTime = document.querySelector("#dateTime");
+let body = document.getElementsByTagName("body")[0];
+
 function Weather(city, cond, humidity, loc, timeStamp, temp, wind){
     this.city = city;
     this.cond = cond;
@@ -19,15 +20,27 @@ function Weather(city, cond, humidity, loc, timeStamp, temp, wind){
     this.wind = wind;
 };
 
+
+setBackground();
+content.style.opacity = 0;
+
+
+function setBackground(){
+    let hours = new Date().getHours();
+    if (hours > 6 && hours < 20){
+        body.classList.add("daytime");
+    }
+    else{
+        body.classList.add("nighttime");
+    }
+}
+
 //console.log(getDateTime());
 //Add event listener to text input
 searchQuery.addEventListener("keypress", function (event) {
     parseSearchInput(event);
 });
 
-if (searchQuery.value === ""){
-    content.style.opacity = 0;
-}
 
 //Parse text input and append to API link
 function parseSearchInput(event) {
@@ -68,13 +81,14 @@ function parseCurrentData() {
     set1.desc = data.list[0].weather[0].description;
     set1.humidity = "Humidity: " + data.list[0].main.humidity + "%";
     set1.loc = data.city.name + ", " + data.city.country;
-    set1.temp = parseInt(data.list[0].main.temp - 273) + "°";
-    set1.wind = "Wind speed: " + data.list[0].wind.speed + " MPH";
+    set1.temp = "  " + parseInt(data.list[0].main.temp - 273) + "°";
+    set1.wind = "Wind: " + data.list[0].wind.speed + " MPH";
     desc.innerHTML = set1.desc;
     humidity.innerHTML = set1.humidity;
     loc.innerHTML = set1.loc;
     temp.innerHTML = set1.temp;
     wind.innerHTML = set1.wind;
+    dateTime.innerHTML = getDateTime();
    
 }
 
