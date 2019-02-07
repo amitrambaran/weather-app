@@ -1,5 +1,5 @@
 const apiKey = "e5c70d2a66ae1d10e85c6dd2081e302d";
-var data;
+var data, dayTrack = 0;
 let searchQuery = document.querySelector("input[type='text']");
 let loc = document.getElementById("location");
 let temp = document.getElementById("temp");
@@ -8,8 +8,11 @@ let humidity = document.getElementById("humidity");
 let content = document.querySelector(".content");
 let dateTime = document.querySelector("#dateTime");
 let body = document.getElementsByTagName("body")[0];
+let picture = document.getElementById("picture");
+let hourly = document.getElementsByClassName("hourly");
+let daily = document.getElementsByClassName("daily");
 
-function Weather(city, cond, humidity, loc, timeStamp, temp, wind){
+function Weather(city, cond, humidity, loc, timeStamp, temp, wind) {
     this.city = city;
     this.cond = cond;
     this.desc = desc;
@@ -20,32 +23,18 @@ function Weather(city, cond, humidity, loc, timeStamp, temp, wind){
     this.wind = wind;
 };
 
-
-setBackground();
 content.style.opacity = 0;
+body.classList.add("daytime");
 
-
-function setBackground(){
-    let hours = new Date().getHours();
-    if (hours > 6 && hours < 20){
-        body.classList.add("daytime");
-    }
-    else{
-        body.classList.add("nighttime");
-    }
-}
-
-//console.log(getDateTime());
 //Add event listener to text input
 searchQuery.addEventListener("keypress", function (event) {
     parseSearchInput(event);
 });
 
-
 //Parse text input and append to API link
 function parseSearchInput(event) {
     if (event.which === 13) {
-        content.style.opacity = 1;        
+        content.style.opacity = 1;
         if (searchQuery.value === "") {
             alert("Please enter a city.");
         }
@@ -56,7 +45,7 @@ function parseSearchInput(event) {
     }
 }
 
-//Asyncronous AJAX request to API for 5 day / 3 hour weather info
+//Asyncronous AJAX request to OpenWeatherMap's API for 5 day / 3 hour weather info
 function httpRequest(url) {
     var httpReq = new XMLHttpRequest();
     httpReq.onload = function () {
@@ -76,6 +65,7 @@ function httpRequest(url) {
     httpReq.send();
 }
 
+//Parses data from API and sets HTML elements
 function parseCurrentData() {
     let set1 = new Weather();
     set1.desc = data.list[0].weather[0].description;
@@ -88,14 +78,59 @@ function parseCurrentData() {
     loc.innerHTML = set1.loc;
     temp.innerHTML = set1.temp;
     wind.innerHTML = set1.wind;
+    //console.log(data.list[0].weather[0].icon);
+    picture.innerHTML = getIconHTML(0);
     dateTime.innerHTML = getDateTime();
-   
+    setBackground();
+    hourlyConstruct();
+    dailyConstruct();
 }
 
+//Constructs hourly forecast data
+function hourlyConstruct() {
+    for (let i = 0; i <= 7; i++) {
+        let date = new Date(data.list[i].dt_txt);
+        let hourVal = date.getHours();
+        //console.log(date);
+        //console.log(hourVal);
+        hourly[i].innerHTML = hourVal + ":00: " + parseInt(data.list[i].main.temp - 273) + "°";
+    }
+}
+
+//Constructs daily forecast data
+function dailyConstruct() {
+    for (let i = 0; i < 5; i++) {
+        dayTrack += 7;
+        console.log(data.list[dayTrack].main.temp - 273 + "°");
+        daily[i].innerHTML = getIconHTML(dayTrack) + "" + parseInt(data.list[dayTrack].main.temp - 273) + "°";
+    }
+}
+
+//Retreive current date/time info
 function getDateTime() {
-    var today = new Date();
+    var today = new Date(data.list[0].dt_txt);
     var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
     var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    dateTime = date + ' ' + time;
+    dateTime = date + ' ' + time + " UTC";
     return dateTime;
+}
+
+//Retreive corresponding thumbnail based on weather conditions
+function getIconHTML(listNo) {
+    let link = "<img src = \"http://openweathermap.org/img/w/" + data.list[listNo].weather[0].icon + ".png\" width='50' height='50'></img>";
+    return link;
+}
+
+//Set background to daytime or nighttime theme based on time of day
+function setBackground() {
+    body.classList.remove("daytime");
+    body.classList.remove("nigttime");
+    let date = new Date();
+    let hours = date.getHours();
+    if (hours > 6 && hours < 20) {
+        body.classList.add("daytime");
+    }
+    else {
+        body.classList.add("nighttime");
+    }
 }

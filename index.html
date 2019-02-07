@@ -14,22 +14,39 @@
     <div class="container">
         <header>
             <div class="searchbar">
-                <input type="text" placeholder="Search for a city">
+                <input type="text" placeholder="Search for a city" onfocus="this.placeholder=''"
+                    onblur="this.placeholder='Search for a city'"">
             </div>
         </header>
-        <main class="content">
-            <div id="location"></div>
-            <div id="dateTime"></div>
-            <div class="picture"></div>
-            <div id="temp"></div>
-            <div id="icon"></div>
-            <div id="cond"></div>
-            <div id="desc"></div>
-            <div id="wind"></div>
-            <div id="humidity"></div>
-        </main>
-    </div>
-    <script src="app.js"></script>
+        <main class=" content">
+                <div id="location"></div>
+                <div id="dateTime"></div>
+                <div id="temp"></div>
+                <div id="picture"></div>
+                <div id="icon"></div>
+                <div id="cond"></div>
+                <div id="desc"></div>
+                <div id="wind"></div>
+                <div id="humidity"></div>
+                <h2>Hourly Forecast</h2>
+                <div id="hour1" class="hourly"></div>
+                <div id="hour2" class="hourly"></div>
+                <div id="hour3" class="hourly"></div>
+                <div id="hour4" class="hourly"></div>
+                <div id="hour5" class="hourly"></div>
+                <div id="hour6" class="hourly"></div>
+                <div id="hour7" class="hourly"></div>
+                <div id="hour8" class="hourly"></div>
+                <h2>5 Day Trend</h2>
+                <div id="day1" class="daily"></div>
+                <div id="day2" class="daily"></div>
+                <div id="day3" class="daily"></div>
+                <div id="day4" class="daily"></div>
+                <div id="day5" class="daily"></div>
+
+                </main>
+            </div>
+            <script src="app.js"></script>
 </body>
 
 </html>
