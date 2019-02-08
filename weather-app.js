@@ -26,7 +26,6 @@ function Weather(city, cond, humidity, loc, timeStamp, temp, wind) {
     this.wind = wind;
 };
 
-content.style.opacity = 0;
 body.classList.add("daytime");
 setBackground();
 
@@ -49,7 +48,7 @@ function parseSearchInput(event) {
             alert("Please enter a city.");
         }
         console.log(searchQuery.value);
-        let url = "http://api.openweathermap.org/data/2.5/forecast?q=" + searchQuery.value + "&appid=" + apiKey;
+        let url = "https://api.openweathermap.org/data/2.5/forecast?q=" + searchQuery.value + "&appid=" + apiKey;
         console.log(url);
         httpRequest(url);
     }
