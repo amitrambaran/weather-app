@@ -28,6 +28,7 @@ function Weather(city, cond, humidity, loc, timeStamp, temp, wind) {
 
 content.style.opacity = 0;
 body.classList.add("daytime");
+setBackground();
 
 //Add event listener to text input
 searchQuery.addEventListener("keypress", function (event) {
@@ -127,7 +128,7 @@ function dailyConstruct() {
 function getDateTime() {
     var today = new Date(data.list[0].dt_txt);
     var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    var time = today.getHours() + ":00";
     dateTime = date + ' ' + time + " UTC";
     return dateTime;
 }
@@ -140,7 +141,7 @@ function getDaysOfWeek(day) {
     let today = new Date();
     let thisDay = today.getDay();
     dayOfWeek = myDays[thisDay];
-    console.log(myDays[thisDay + day]);
+    //console.log(myDays[thisDay + day]);
     return (myDays[thisDay + day]);
 
 }
@@ -161,7 +162,7 @@ function setBackground() {
         body.classList.add("daytime");
     }
     else {
-        body.classList.add("daytime");
+        body.classList.add("nighttime");
     }
 }
 
