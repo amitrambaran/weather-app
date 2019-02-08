@@ -112,7 +112,11 @@ function hourlyConstruct() {
 //Constructs daily forecast data
 function dailyConstruct() {
     for (let i = 0; i < 5; i++) {
-        dayTrack += 7;
+        dayTrack += 8;
+        //API doesn't provide 5 complete days; 5th day is 21 hours ahead of 4th day (1 dayTrack unit = 3 hours real time).
+        if (dayTrack === 40) {
+            dayTrack = 37;
+        }
         //console.log(data.list[dayTrack].main.temp - 273 + "°");
         daily[i].innerHTML = getDaysOfWeek(i) + " " + getIconHTML(dayTrack) + getTemp(dayTrack);
     }
@@ -164,7 +168,7 @@ function setBackground() {
 //Returns temperature based on the 'celsius' flag
 function getTemp(listIndex) {
     if (!celsius) {
-        return parseInt(data.list[listIndex].main.temp - 273) * 2 + 30 + "°";
+        return parseInt(data.list[listIndex].main.temp - 273) * 1.8 + 32 + "°";
     }
     else {
         return parseInt(data.list[listIndex].main.temp - 273) + "°";
