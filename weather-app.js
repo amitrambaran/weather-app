@@ -112,10 +112,13 @@ function hourlyConstruct() {
 //Constructs daily forecast data
 function dailyConstruct() {
     for (let i = 0; i < 5; i++) {
-        dayTrack += 8;
         //API doesn't provide 5 complete days; 5th day is 21 hours ahead of 4th day rather than 24 (1 dayTrack unit = 3 hours real time).
-        if (dayTrack === 40) {
-            dayTrack = 37;
+        if (i !== 4) {
+            dayTrack += 8;
+        }
+        //accounts for total listcnt not being exactly 40
+        else {
+            dayTrack = (data.cnt) - 1;
         }
         //console.log(data.list[dayTrack].main.temp - 273 + "°");
         daily[i].innerHTML = getDaysOfWeek(i) + " " + getIconHTML(dayTrack) + getTemp(dayTrack);
