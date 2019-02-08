@@ -105,7 +105,7 @@ function hourlyConstruct() {
         let hourVal = date.getHours();
         //console.log(date);
         //console.log(hourVal);
-        hourly[i].innerHTML = hourVal + ":00: " + getTemp(i);
+        hourly[i].innerHTML = hourVal + ":00" + "<br>" + getTemp(i);
     }
 }
 
@@ -157,7 +157,7 @@ function setBackground() {
         body.classList.add("daytime");
     }
     else {
-        body.classList.add("nighttime");
+        body.classList.add("daytime");
     }
 }
 
