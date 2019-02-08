@@ -121,7 +121,6 @@ p {
 
 #temp {
     font-size: 5em;
-    margin-left: 50px;
 }
 
 #wind, #humidity {
@@ -144,6 +143,8 @@ p {
     display: inline-flex;
     justify-content: space-between;
     padding: 10px 10px;
+    text-align: center;
+    margin: 10px 10px;
 }
 
 @media only screen and (max-width: 600px) {

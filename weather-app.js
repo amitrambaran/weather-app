@@ -105,7 +105,7 @@ function hourlyConstruct() {
         let hourVal = date.getHours();
         //console.log(date);
         //console.log(hourVal);
-        hourly[i].innerHTML = hourVal + ":00" + "<br>" + getTemp(i);
+        hourly[i].innerHTML = getIconHTML(i) + getTemp(i) + "<br>" + hourVal + ":00";
     }
 }
 
