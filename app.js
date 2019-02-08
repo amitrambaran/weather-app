@@ -11,6 +11,8 @@ let body = document.getElementsByTagName("body")[0];
 let picture = document.getElementById("picture");
 let hourly = document.getElementsByClassName("hourly");
 let daily = document.getElementsByClassName("daily");
+let checkbox = document.querySelector('input[type="checkbox"');
+let celsius = true;
 
 //Weather object constructor
 function Weather(city, cond, humidity, loc, timeStamp, temp, wind) {
@@ -32,10 +34,15 @@ searchQuery.addEventListener("keypress", function (event) {
     parseSearchInput(event);
 });
 
+checkbox.addEventListener("click", function () {
+    celsius = !celsius;
+    console.log(celsius);
+    parseCurrentData();
+})
+
 //Parse text input and append to API link
 function parseSearchInput(event) {
     if (event.which === 13) {
-        dayTrack = 0;
         content.style.opacity = 1;
         if (searchQuery.value === "") {
             alert("Please enter a city.");
@@ -69,11 +76,13 @@ function httpRequest(url) {
 
 //Parses data from API and sets HTML elements
 function parseCurrentData() {
+    //Zero out dayTrack on either Enter keypress or toggle switch (parseCurrentData() invoked on both events)
+    dayTrack = 0;
     let set1 = new Weather();
     set1.desc = data.list[0].weather[0].description;
     set1.humidity = "Humidity: " + data.list[0].main.humidity + "%";
     set1.loc = data.city.name + ", " + data.city.country;
-    set1.temp = "  " + parseInt(data.list[0].main.temp - 273) + "°";
+    set1.temp = getTemp(0);
     set1.wind = "Wind: " + data.list[0].wind.speed + " MPH";
     desc.innerHTML = set1.desc;
     humidity.innerHTML = set1.humidity;
@@ -96,7 +105,7 @@ function hourlyConstruct() {
         let hourVal = date.getHours();
         //console.log(date);
         //console.log(hourVal);
-        hourly[i].innerHTML = hourVal + ":00: " + parseInt(data.list[i].main.temp - 273) + "°";
+        hourly[i].innerHTML = hourVal + ":00: " + getTemp(i);
     }
 }
 
@@ -105,7 +114,7 @@ function dailyConstruct() {
     for (let i = 0; i < 5; i++) {
         dayTrack += 7;
         //console.log(data.list[dayTrack].main.temp - 273 + "°");
-        daily[i].innerHTML = getDaysOfWeek(i) + " " + getIconHTML(dayTrack) + "" + parseInt(data.list[dayTrack].main.temp - 273) + "°";
+        daily[i].innerHTML = getDaysOfWeek(i) + " " + getIconHTML(dayTrack) + getTemp(dayTrack);
     }
 
 }
@@ -119,6 +128,7 @@ function getDateTime() {
     return dateTime;
 }
 
+//Returns corresponding day of week
 function getDaysOfWeek(day) {
     day += 1;
     let myDays =
@@ -132,8 +142,8 @@ function getDaysOfWeek(day) {
 }
 
 //Retreive corresponding thumbnail based on weather conditions
-function getIconHTML(listNo) {
-    let link = "<img src = \"http://openweathermap.org/img/w/" + data.list[listNo].weather[0].icon + ".png\" width='50' height='50'></img>";
+function getIconHTML(listIndex) {
+    let link = "<img src = \"http://openweathermap.org/img/w/" + data.list[listIndex].weather[0].icon + ".png\" width='50' height='50'></img>";
     return link;
 }
 
@@ -148,5 +158,15 @@ function setBackground() {
     }
     else {
         body.classList.add("nighttime");
+    }
+}
+
+//Returns temperature based on the 'celsius' flag
+function getTemp(listIndex) {
+    if (!celsius) {
+        return parseInt(data.list[listIndex].main.temp - 273) * 2 + 30 + "°";
+    }
+    else {
+        return parseInt(data.list[listIndex].main.temp - 273) + "°";
     }
 }
