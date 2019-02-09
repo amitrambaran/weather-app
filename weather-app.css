@@ -69,11 +69,11 @@ input::placeholder {
 }
 
 input:checked+.slider {
-    background-color: rgb(243, 33, 33);
+    background-color: rgb(255, 60, 60);
 }
 
 input:focus+.slider {
-    box-shadow: 0 0 1px rgb(243, 33, 33);
+    box-shadow: 0 0 1px rgb(255, 60, 60);
 }
 
 input:checked+.slider:before {
@@ -93,7 +93,7 @@ input:checked+.slider:before {
 }
 
 #red {
-    color: rgb(255, 0, 0);
+    color: rgb(255, 60, 60);
     font-weight: bold;
     text-shadow:
     -1px -1px 0 rgb(255, 218, 218),
