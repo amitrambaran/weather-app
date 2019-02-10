@@ -150,7 +150,7 @@ function getDaysOfWeek(day) {
 
 //Retreive corresponding thumbnail based on weather conditions
 function getIconHTML(listIndex) {
-    let link = "<img src = \"http://openweathermap.org/img/w/" + data.list[listIndex].weather[0].icon + ".png\" width='50' height='50'></img>";
+    let link = "<img src = \"https://openweathermap.org/img/w/" + data.list[listIndex].weather[0].icon + ".png\" width='50' height='50'></img>";
     return link;
 }
 
