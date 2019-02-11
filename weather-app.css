@@ -8,8 +8,7 @@ body {
 }
 
 input[type=text] {
-    color: transparent;
-    text-shadow: 0 0 0 rgb(0, 104, 202);
+    color: rgb(0, 117, 172)
     font-size: 1.5em;
     height: 35px;
     width: 60%;
