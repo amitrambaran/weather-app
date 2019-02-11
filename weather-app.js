@@ -26,7 +26,6 @@ function Weather(city, cond, humidity, loc, timeStamp, temp, wind) {
     this.wind = wind;
 };
 
-body.classList.add("daytime");
 setBackground();
 
 //Add event listener to text input
