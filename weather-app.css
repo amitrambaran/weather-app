@@ -8,7 +8,7 @@ body {
 }
 
 input[type=text] {
-    color: rgb(0, 117, 172)
+    color: rgb(0, 117, 172);
     font-size: 1.5em;
     height: 35px;
     width: 60%;
@@ -84,21 +84,13 @@ input:checked+.slider:before {
 #blue {
     color: rgb(0, 104, 202);
     font-weight: bold;
-    text-shadow:
-    -1px -1px 0 rgb(215, 236, 255),
-    1px -1px 0 rgb(215, 236, 255),
-    -1px 1px 0 rgb(215, 236, 255),
-    1px 1px 0 rgb(215, 236, 255);
+    text-shadow: -1px -1px 0 rgb(215, 236, 255), 1px -1px 0 rgb(215, 236, 255), -1px 1px 0 rgb(215, 236, 255), 1px 1px 0 rgb(215, 236, 255);
 }
 
 #red {
     color: rgb(221, 50, 50);
     font-weight: bold;
-    text-shadow:
-    -1px -1px 0 rgb(255, 218, 218),
-    1px -1px 0 rgb(255, 218, 218),
-    -1px 1px 0 rgb(255, 218, 218),
-    1px 1px 0 rgb(255, 218, 218);
+    text-shadow: -1px -1px 0 rgb(255, 218, 218), 1px -1px 0 rgb(255, 218, 218), -1px 1px 0 rgb(255, 218, 218), 1px 1px 0 rgb(255, 218, 218);
 }
 
 p {

@@ -11,7 +11,7 @@ let body = document.getElementsByTagName("body")[0];
 let picture = document.getElementById("picture");
 let hourly = document.getElementsByClassName("hourly");
 let daily = document.getElementsByClassName("daily");
-let checkbox = document.querySelector('input[type="checkbox"');
+let checkbox = document.querySelector('input[type="checkbox"]');
 let celsius = true;
 
 //Weather object constructor
@@ -29,7 +29,7 @@ function Weather(city, cond, humidity, loc, timeStamp, temp, wind) {
 setBackground();
 
 //Add event listener to text input
-searchQuery.addEventListener("keypress", function (event) {
+searchQuery.addEventListener("keyup", function (event) {
     parseSearchInput(event);
 });
 
@@ -41,7 +41,7 @@ checkbox.addEventListener("click", function () {
 
 //Parse text input and append to API link
 function parseSearchInput(event) {
-    if (event.which === 13) {
+    if (event.key === "Enter" || event.key === 13) {
         content.style.opacity = 1;
         if (searchQuery.value === "") {
             alert("Please enter a city.");
@@ -155,14 +155,10 @@ function getIconHTML(listIndex) {
 
 //Set background to daytime or nighttime theme based on time of day
 function setBackground() {
-    body.classList.remove("daytime");
-    body.classList.remove("nigttime");
     let date = new Date();
     let hours = date.getHours();
-    if (hours > 6 && hours < 20) {
-        body.classList.add("daytime");
-    }
-    else {
+    if (hours < 6 || hours > 20) {
+        body.classList.remove("daytime");
         body.classList.add("nighttime");
     }
 }
