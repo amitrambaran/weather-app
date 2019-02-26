@@ -148,6 +148,11 @@ p {
     margin: 10px 10px;
 }
 
+.daily{
+    display: flex;
+    justify-content: center;
+}
+
 @media only screen and (max-width: 600px) {
     input::placeholder {
         font-size: 0.6em;
