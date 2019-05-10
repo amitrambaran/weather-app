@@ -88,7 +88,6 @@ function parseCurrentData() {
     loc.innerHTML = set1.loc;
     temp.innerHTML = set1.temp;
     wind.innerHTML = set1.wind;
-    //console.log(data.list[0].weather[0].icon);
     picture.innerHTML = getIconHTML(0);
     dateTime.innerHTML = getDateTime();
     setBackground();
@@ -102,8 +101,6 @@ function hourlyConstruct() {
     for (let i = 0; i <= 7; i++) {
         let date = new Date(data.list[i].dt_txt);
         let hourVal = date.getHours();
-        //console.log(date);
-        //console.log(hourVal);
         hourly[i].innerHTML = getIconHTML(i) + getTemp(i) + "<br>" + hourVal + ":00";
     }
 }

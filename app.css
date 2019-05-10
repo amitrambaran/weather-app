@@ -81,31 +81,19 @@ input:checked+.slider:before {
     transform: translateX(26px);
 }
 
-#blue {
-    color: rgb(0, 104, 202);
-    font-weight: bold;
-    text-shadow: -1px -1px 0 rgb(215, 236, 255), 1px -1px 0 rgb(215, 236, 255), -1px 1px 0 rgb(215, 236, 255), 1px 1px 0 rgb(215, 236, 255);
-}
-
-#red {
-    color: rgb(221, 50, 50);
-    font-weight: bold;
-    text-shadow: -1px -1px 0 rgb(255, 218, 218), 1px -1px 0 rgb(255, 218, 218), -1px 1px 0 rgb(255, 218, 218), 1px 1px 0 rgb(255, 218, 218);
-}
-
 p {
     display: inline-block;
     transform: translate3d(0, -4px, 0)
 }
 
 .daytime {
-    background-image: linear-gradient(0deg, rgb(82, 157, 255), rgb(89, 194, 255));
+    background-color: rgb(82, 172, 255);
     background-repeat: no-repeat;
     background-attachment: fixed;
 }
 
 .nighttime {
-    background-image: linear-gradient(0deg, rgb(0, 0, 0), rgb(0, 5, 53));
+    background-color: midnightblue;
     background-repeat: no-repeat;
     background-attachment: fixed;
 }
@@ -148,7 +136,7 @@ p {
     margin: 10px 10px;
 }
 
-.daily{
+.daily {
     display: flex;
     justify-content: center;
 }
